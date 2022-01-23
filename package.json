@@ -1,7 +1,7 @@
 {
-	"name": "obsidian-sample-plugin",
+	"name": "codeblock-completer",
 	"version": "0.0.1",
-	"description": "This is a sample plugin for Obsidian.",
+	"description": "Autocomplete your codeblock-types",
 	"main": "main.js",
 	"scripts": {
 		"dev": "node esbuild.config.mjs",
