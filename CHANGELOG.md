@@ -1,4 +1,16 @@
 ## Changelog
+### [0.0.3](https://github.com/SkepticMystic/codeblock-completer/compare/0.0.2...0.0.3) (2022-01-24)
+
+
+### Documentation
+
+* :memo: Update Readme ([647b949](https://github.com/SkepticMystic/codeblock-completer/commit/647b94994f8e519d311cfee05a72fb18ebed9c35))
+
+
+### Fixes
+
+* :bug: Don't add new line if there is already content inside the codeblock (fix [#2](https://github.com/SkepticMystic/codeblock-completer/issues/2)) ([9bb9bcf](https://github.com/SkepticMystic/codeblock-completer/commit/9bb9bcf78edc36a9a0bf54f02f94a2434cf33ab8))
+
 ### 0.0.2 (2022-01-23)
 
 
