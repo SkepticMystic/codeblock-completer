@@ -57,22 +57,35 @@ export class CodeblockSuggester extends EditorSuggest<string> {
 		});
 	}
 
-	addLineBreak(end: EditorPosition, ed: Editor) {
-		const nextLine = ed.getLine(end.line + 1);
-		console.log(nextLine);
+	addLineBreak(nextLine: string) {
 		return nextLine === "```" || nextLine === "" || nextLine === "\n"
 			? "\n\n"
 			: "";
 	}
 
+	addClosingBackticks(currLine: string, nextLine: string) {
+		return (
+			// No suggestion, just backticks "```"
+			(currLine === "```" ||
+				// Partial suggestion
+				(currLine.length > 3 && !currLine.endsWith("```"))) &&
+				// Make sure there is no content being wrapped
+				(nextLine === "" || nextLine === "\n")
+				? "```"
+				: ""
+		);
+	}
+
 	selectSuggestion(suggestion: string): void {
-		const { context, addLineBreak } = this;
+		const { context, addLineBreak, addClosingBackticks } = this;
 		if (context) {
 			const { start, end, editor } = context;
+			const currLine = editor.getLine(end.line);
+			const nextLine = editor.getLine(end.line + 1);
+
 			const replacement = `\`\`\`${suggestion}${addLineBreak(
-				end,
-				editor
-			)}`;
+				nextLine
+			)}${addClosingBackticks(currLine, nextLine)}`;
 
 			editor.replaceRange(replacement, { ch: 0, line: start.line }, end);
 			editor.setCursor({ ch: 0, line: end.line + 1 });
