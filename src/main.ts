@@ -1,11 +1,11 @@
 import { Plugin } from "obsidian";
 import { DEFAULT_SETTINGS } from "./const";
-import { MyPluginSettings } from "./interfaces";
+import { Settings } from "./interfaces";
 import { SettingTab } from "./SettingTab";
 import { CodeblockSuggester } from "./Suggester";
 
-export default class MyPlugin extends Plugin {
-	settings: MyPluginSettings;
+export default class CCPlugin extends Plugin {
+	settings: Settings;
 
 	async onload() {
 		await this.loadSettings();

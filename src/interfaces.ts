@@ -1,6 +1,6 @@
 import { MarkdownPostProcessorContext } from "obsidian";
 
-export interface MyPluginSettings {
+export interface Settings {
 	customTypes: string[];
 }
 

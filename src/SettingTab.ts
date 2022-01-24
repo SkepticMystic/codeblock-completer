@@ -1,11 +1,11 @@
 import { App, PluginSettingTab, Setting } from "obsidian";
-import MyPlugin from "./main";
+import CCPlugin from "./main";
 import { splitAndTrim } from "./utils";
 
 export class SettingTab extends PluginSettingTab {
-	plugin: MyPlugin;
+	plugin: CCPlugin;
 
-	constructor(app: App, plugin: MyPlugin) {
+	constructor(app: App, plugin: CCPlugin) {
 		super(app, plugin);
 		this.plugin = plugin;
 	}
