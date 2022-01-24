@@ -1,4 +1,11 @@
 ## Changelog
+### [0.0.4](https://github.com/SkepticMystic/codeblock-completer/compare/0.0.3...0.0.4) (2022-01-24)
+
+
+### Fixes
+
+* :bug: Work with `auto pair markdown syntax` core setting ([#3](https://github.com/SkepticMystic/codeblock-completer/issues/3)) ([ac3311b](https://github.com/SkepticMystic/codeblock-completer/commit/ac3311bf25dd369ba3fb4b017f5f09b629dc0b4e))
+
 ### [0.0.3](https://github.com/SkepticMystic/codeblock-completer/compare/0.0.2...0.0.3) (2022-01-24)
 
 
