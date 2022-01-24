@@ -57,15 +57,24 @@ export class CodeblockSuggester extends EditorSuggest<string> {
 		});
 	}
 
+	addLineBreak(end: EditorPosition, ed: Editor) {
+		const nextLine = ed.getLine(end.line + 1);
+		console.log(nextLine);
+		return nextLine === "```" || nextLine === "" || nextLine === "\n"
+			? "\n\n"
+			: "";
+	}
+
 	selectSuggestion(suggestion: string): void {
-		const { context } = this;
+		const { context, addLineBreak } = this;
 		if (context) {
 			const { start, end, editor } = context;
-			editor.replaceRange(
-				"```" + suggestion + "\n\n",
-				{ ch: 0, line: start.line },
-				end
-			);
+			const replacement = `\`\`\`${suggestion}${addLineBreak(
+				end,
+				editor
+			)}`;
+
+			editor.replaceRange(replacement, { ch: 0, line: start.line }, end);
 			editor.setCursor({ ch: 0, line: end.line + 1 });
 		}
 	}
