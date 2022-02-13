@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { MarkdownPreviewRenderer } from "obsidian";
+
 	import CCPlugin from "../main";
 	import { SettingTab } from "../SettingTab";
 
@@ -7,6 +9,11 @@
 
 	const { settings } = plugin;
 	let { codeblockTemplates, customTypes } = settings;
+
+	const typesFromPlugins = Object.keys(
+		//@ts-ignore
+		MarkdownPreviewRenderer.codeBlockPostProcessors
+	);
 
 	async function addTemplate() {
 		codeblockTemplates.push({ type: "", template: "" });
@@ -51,7 +58,7 @@
 					on:blur={async () => await plugin.saveSettings()}
 					bind:value={cbTemplate.type}
 				/>
-				{#if cbTemplate.type !== "" && !customTypes.includes(cbTemplate.type)}
+				{#if cbTemplate.type !== "" && ![...typesFromPlugins, ...customTypes].includes(cbTemplate.type)}
 					<button
 						class="missingCustomType"
 						aria-label="This type is not in your custom types, click to add"
