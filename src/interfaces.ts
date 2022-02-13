@@ -1,7 +1,12 @@
 import { MarkdownPostProcessorContext } from "obsidian";
 
+interface CodeblockTemplate {
+	type: string;
+	template: string;
+}
 export interface Settings {
 	customTypes: string[];
+	codeblockTemplates: CodeblockTemplate[];
 }
 
 type CodeblockCallback = (

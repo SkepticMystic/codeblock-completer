@@ -1,6 +1,7 @@
 import { App, PluginSettingTab, Setting } from "obsidian";
 import CCPlugin from "./main";
 import { splitAndTrim } from "./utils";
+import CodeblockTemplates from "./Components/CodeblockTemplates.svelte";
 
 export class SettingTab extends PluginSettingTab {
 	plugin: CCPlugin;
@@ -28,5 +29,10 @@ export class SettingTab extends PluginSettingTab {
 					await plugin.saveSettings();
 				};
 			});
+
+		new CodeblockTemplates({
+			target: containerEl,
+			props: { plugin: this.plugin },
+		});
 	}
 }
