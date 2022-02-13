@@ -40,11 +40,12 @@
 	+
 </button>
 
-{#each codeblockTemplates as cbTemplate, i}
-	<div class="CCItem">
-		<div class="CBInputs">
-			<div class="CBName">
+<div class="CCGrid">
+	{#each codeblockTemplates as cbTemplate, i}
+		<div class="CCItem">
+			<span>
 				<input
+					class="CCName"
 					type="text"
 					placeholder="Type"
 					on:blur={async () => await plugin.saveSettings()}
@@ -60,7 +61,11 @@
 						+
 					</button>
 				{/if}
-			</div>
+				<button
+					aria-label="Remove Template"
+					on:click={async () => await removeTemplate(i)}>X</button
+				>
+			</span>
 			<div class="CBTemplate">
 				<label>
 					<textarea
@@ -71,19 +76,18 @@
 				</label>
 			</div>
 		</div>
-		<div class="removeTemplate">
-			<button
-				aria-label="Remove Template"
-				on:click={async () => await removeTemplate(i)}>X</button
-			>
-		</div>
-	</div>
-{/each}
+	{/each}
+</div>
 
 <style>
-	div.CCItem {
+	input.CCName {
+		display: inline;
+	}
+	div.CCGrid {
 		display: flex;
-		flex-direction: row;
+		flex-wrap: wrap;
+	}
+	div.CCItem {
 		margin: 10px 0;
 		padding: 5px 10px;
 		border: 1px solid var(--background-modifier-border);
