@@ -1,4 +1,11 @@
 ## Changelog
+### [0.0.5](https://github.com/SkepticMystic/codeblock-completer/compare/0.0.4...0.0.5) (2022-02-13)
+
+
+### Features
+
+* :sparkles: Codeblock templates! ([4f89c9d](https://github.com/SkepticMystic/codeblock-completer/commit/4f89c9d12238fc700853f296028cada29e495264))
+
 ### [0.0.4](https://github.com/SkepticMystic/codeblock-completer/compare/0.0.3...0.0.4) (2022-01-24)
 
 
