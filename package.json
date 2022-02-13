@@ -1,6 +1,6 @@
 {
 	"name": "codeblock-completer",
-	"version": "0.0.6",
+	"version": "0.0.7",
 	"description": "Autocomplete your codeblock-types",
 	"main": "main.js",
 	"scripts": {
