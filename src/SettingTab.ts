@@ -37,5 +37,17 @@ export class SettingTab extends PluginSettingTab {
 			target: containerEl,
 			props: { settingsTab: this, plugin: this.plugin },
 		});
+
+		new Setting(containerEl)
+			.setName("Add Codeblock Labels")
+			.setDesc(
+				"Enable this to add `{}` at the end of the codeblock type. This is useful if you have the Codeblock Label plugin installed."
+			)
+			.addToggle((tog) =>
+				tog.onChange(async (value) => {
+					settings.addCBLabel = value;
+					await plugin.saveSettings();
+				})
+			);
 	}
 }

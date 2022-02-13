@@ -87,17 +87,26 @@ export class CodeblockSuggester extends EditorSuggest<string> {
 	}
 
 	selectSuggestion(suggestion: string): void {
-		const { context, addLineBreak, addClosingBackticks } = this;
+		const {
+			context,
+			addLineBreak,
+			addClosingBackticks,
+			plugin: {
+				settings: { addCBLabel },
+			},
+		} = this;
 		if (context) {
 			const { start, end, editor } = context;
 			const currLine = editor.getLine(end.line);
 			const nextLine = editor.getLine(end.line + 1);
 			const template = this.getCodeblockTemplate(suggestion);
 
-			const replacement = `\`\`\`${suggestion}${addLineBreak(
-				nextLine,
-				template
-			)}${addClosingBackticks(currLine, nextLine)}`;
+			const replacement = `\`\`\`${suggestion}${
+				addCBLabel ? "{}" : ""
+			}${addLineBreak(nextLine, template)}${addClosingBackticks(
+				currLine,
+				nextLine
+			)}`;
 
 			editor.replaceRange(replacement, { ch: 0, line: start.line }, end);
 

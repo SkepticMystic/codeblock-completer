@@ -5,6 +5,7 @@ interface CodeblockTemplate {
 	template: string;
 }
 export interface Settings {
+	addCBLabel: boolean;
 	customTypes: string[];
 	codeblockTemplates: CodeblockTemplate[];
 }
