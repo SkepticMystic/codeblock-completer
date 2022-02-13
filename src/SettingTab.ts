@@ -3,6 +3,8 @@ import CCPlugin from "./main";
 import { splitAndTrim } from "./utils";
 import CodeblockTemplates from "./Components/CodeblockTemplates.svelte";
 
+const fragWithHTML = (html: string) =>
+	createFragment((frag) => (frag.createDiv().innerHTML = html));
 export class SettingTab extends PluginSettingTab {
 	plugin: CCPlugin;
 
@@ -21,7 +23,7 @@ export class SettingTab extends PluginSettingTab {
 			.setDesc(
 				"A comma-separated list of codeblocks types to suggest (aside from those added by your plugins)."
 			)
-			.addText((text) => {
+			.addTextArea((text) => {
 				text.setValue(settings.customTypes.join(", "));
 				text.inputEl.onblur = async () => {
 					const value = text.getValue();
@@ -32,7 +34,7 @@ export class SettingTab extends PluginSettingTab {
 
 		new CodeblockTemplates({
 			target: containerEl,
-			props: { plugin: this.plugin },
+			props: { settingsTab: this, plugin: this.plugin },
 		});
 	}
 }

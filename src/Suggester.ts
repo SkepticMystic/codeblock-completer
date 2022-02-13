@@ -97,7 +97,18 @@ export class CodeblockSuggester extends EditorSuggest<string> {
 			)}${addClosingBackticks(currLine, nextLine)}`;
 
 			editor.replaceRange(replacement, { ch: 0, line: start.line }, end);
-			editor.setCursor({ ch: 0, line: end.line + 1 });
+
+			const cursorOff = editor.getValue().indexOf("$|$");
+			if (cursorOff !== -1) {
+				const cursorPos = editor.offsetToPos(cursorOff);
+				editor.setLine(
+					cursorPos.line,
+					editor.getLine(cursorPos.line).replace("$|$", "")
+				);
+				editor.setCursor(cursorPos);
+			} else {
+				editor.setCursor({ ch: 0, line: end.line + 1 });
+			}
 		}
 	}
 }
