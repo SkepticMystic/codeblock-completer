@@ -1,4 +1,17 @@
 ## Changelog
+### [0.0.6](https://github.com/SkepticMystic/codeblock-completer/compare/0.0.5...0.0.6) (2022-02-13)
+
+
+### Features
+
+* Button to add new template type to custom types ([fbaf788](https://github.com/SkepticMystic/codeblock-completer/commit/fbaf7883a6fd416dfb21d2121a9fb646db4be577))
+* Use `$|$` to set where cursor is placed after inserting template ([2c360ce](https://github.com/SkepticMystic/codeblock-completer/commit/2c360ce1660ee0bc9a872b5f953ed1c4bc22c9c6))
+
+
+### Fixes
+
+* Remove duplicate types ([411647d](https://github.com/SkepticMystic/codeblock-completer/commit/411647d7921df2659480bd615c08747eacaaaecf))
+
 ### [0.0.5](https://github.com/SkepticMystic/codeblock-completer/compare/0.0.4...0.0.5) (2022-02-13)
 
 
