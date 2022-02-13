@@ -1,4 +1,6 @@
 ## Changelog
+### [0.0.9](https://github.com/SkepticMystic/codeblock-completer/compare/0.0.8...0.0.9) (2022-02-13)
+
 ### [0.0.8](https://github.com/SkepticMystic/codeblock-completer/compare/0.0.7...0.0.8) (2022-02-13)
 
 
