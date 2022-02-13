@@ -1,4 +1,11 @@
 ## Changelog
+### [0.0.10](https://github.com/SkepticMystic/codeblock-completer/compare/0.0.9...0.0.10) (2022-02-13)
+
+
+### Features
+
+* :sparkles: Toggle to add codeblock label at end of cb type (fix [#5](https://github.com/SkepticMystic/codeblock-completer/issues/5)) ([8b18091](https://github.com/SkepticMystic/codeblock-completer/commit/8b18091e5ba82c0e2ec776a3035e1944482b7b20))
+
 ### [0.0.9](https://github.com/SkepticMystic/codeblock-completer/compare/0.0.8...0.0.9) (2022-02-13)
 
 ### [0.0.8](https://github.com/SkepticMystic/codeblock-completer/compare/0.0.7...0.0.8) (2022-02-13)
