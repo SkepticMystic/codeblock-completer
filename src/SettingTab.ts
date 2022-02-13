@@ -24,6 +24,7 @@ export class SettingTab extends PluginSettingTab {
 				"A comma-separated list of codeblocks types to suggest (aside from those added by your plugins)."
 			)
 			.addTextArea((text) => {
+				text.inputEl.addClass("customTypesTA");
 				text.setValue(settings.customTypes.join(", "));
 				text.inputEl.onblur = async () => {
 					const value = text.getValue();
