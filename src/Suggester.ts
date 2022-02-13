@@ -8,6 +8,7 @@ import {
 	TFile,
 } from "obsidian";
 import type BCPlugin from "./main";
+import { removeDups } from "./utils";
 
 export class CodeblockSuggester extends EditorSuggest<string> {
 	plugin: BCPlugin;
@@ -39,15 +40,13 @@ export class CodeblockSuggester extends EditorSuggest<string> {
 		return null;
 	}
 
-	removeDups = (arr: any[]) => [...new Set(arr)];
-
 	getSuggestions = (context: EditorSuggestContext) => {
 		const { query } = context;
 		const fromPlugins = Object.keys(
 			//@ts-ignore
 			MarkdownPreviewRenderer.codeBlockPostProcessors
 		);
-		return this.removeDups(
+		return removeDups(
 			[...this.plugin.settings.customTypes, ...fromPlugins].filter(
 				(sug) => sug.includes(query)
 			)
