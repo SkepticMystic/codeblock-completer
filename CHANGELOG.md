@@ -1,4 +1,11 @@
 ## Changelog
+### [0.0.8](https://github.com/SkepticMystic/codeblock-completer/compare/0.0.7...0.0.8) (2022-02-13)
+
+
+### Fixes
+
+* Also check pluginTypes when adding addToCustomTypes button ([d90ad74](https://github.com/SkepticMystic/codeblock-completer/commit/d90ad743200350bca9760849c209ec8f261a4d8f))
+
 ### [0.0.7](https://github.com/SkepticMystic/codeblock-completer/compare/0.0.6...0.0.7) (2022-02-13)
 
 ### [0.0.6](https://github.com/SkepticMystic/codeblock-completer/compare/0.0.5...0.0.6) (2022-02-13)
