@@ -1,10 +1,12 @@
 <script lang="ts">
 	import CCPlugin from "../main";
+	import { SettingTab } from "../SettingTab";
 
 	export let plugin: CCPlugin;
+	export let settingsTab: SettingTab;
 
 	const { settings } = plugin;
-	let { codeblockTemplates } = settings;
+	let { codeblockTemplates, customTypes } = settings;
 
 	async function addTemplate() {
 		codeblockTemplates.push({ type: "", template: "" });
@@ -17,11 +19,26 @@
 		codeblockTemplates = codeblockTemplates;
 		await plugin.saveSettings();
 	}
+
+	async function addToCustomTypes(type: string) {
+		customTypes.push(type);
+		customTypes = customTypes;
+		await plugin.saveSettings();
+		settingsTab.display();
+	}
 </script>
 
 <h3>Codeblock Templates</h3>
 
-<button on:click={async () => addTemplate()}>+</button>
+<p>
+	Give templates to specific codeblock types.<br />
+	Use <code>$|$</code> to set where the cursor should be placed after inserting
+	the template (Espanso style).
+</p>
+
+<button aria-label="Add new template" on:click={async () => addTemplate()}>
+	+
+</button>
 
 {#each codeblockTemplates as cbTemplate, i}
 	<div class="CCItem">
@@ -33,6 +50,16 @@
 					on:blur={async () => await plugin.saveSettings()}
 					bind:value={cbTemplate.type}
 				/>
+				{#if cbTemplate.type !== "" && !customTypes.includes(cbTemplate.type)}
+					<button
+						class="missingCustomType"
+						aria-label="This type is not in your custom types, click to add"
+						on:click={async () =>
+							await addToCustomTypes(cbTemplate.type)}
+					>
+						+
+					</button>
+				{/if}
 			</div>
 			<div class="CBTemplate">
 				<label>
@@ -45,7 +72,10 @@
 			</div>
 		</div>
 		<div class="removeTemplate">
-			<button on:click={async () => await removeTemplate(i)}>X</button>
+			<button
+				aria-label="Remove Template"
+				on:click={async () => await removeTemplate(i)}>X</button
+			>
 		</div>
 	</div>
 {/each}
@@ -60,6 +90,9 @@
 		border-radius: 5px;
 	}
 
+	button.missingCustomType {
+		background-color: rgb(207, 45, 45) !important;
+	}
 	div.removeTemplate {
 		margin-left: 5px;
 	}
