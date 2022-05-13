@@ -1,4 +1,18 @@
 ## Changelog
+### [0.0.11](https://github.com/SkepticMystic/codeblock-completer/compare/0.0.10...0.0.11) (2022-05-13)
+
+
+### Features
+
+* :sparkles: Place cursor inside coeblock labels ` {}`, if enabled ([37e9a2b](https://github.com/SkepticMystic/codeblock-completer/commit/37e9a2b439ccf18a64938926ea4b2c24144818f1))
+
+
+### Fixes
+
+* :bug: Match lowerCase ([9ecd891](https://github.com/SkepticMystic/codeblock-completer/commit/9ecd891c498e81a16041246b91b70933264bd6a4))
+* :bug: Obsidian now adds a line break in newer versions ([074fac9](https://github.com/SkepticMystic/codeblock-completer/commit/074fac9bf94655b06bf8f19500102c0db7367387))
+* :bug: SetValue of toggle to actual saved value ([b8aef24](https://github.com/SkepticMystic/codeblock-completer/commit/b8aef24b8b9591196f9e5e55513fa9461fae60b6))
+
 ### [0.0.10](https://github.com/SkepticMystic/codeblock-completer/compare/0.0.9...0.0.10) (2022-02-13)
 
 
