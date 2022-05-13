@@ -48,7 +48,7 @@ export class CodeblockSuggester extends EditorSuggest<string> {
 		);
 		return removeDups(
 			[...this.plugin.settings.customTypes, ...fromPlugins].filter(
-				(sug) => sug.includes(query)
+				(sug) => sug.toLowerCase().includes(query.toLowerCase())
 			)
 		);
 	};
