@@ -49,14 +49,6 @@
 	}
 </script>
 
-<h3>Codeblock Templates</h3>
-
-<p>
-	Give templates to specific codeblock types.<br />
-	Use <code>$|$</code> to set where the cursor should be placed after inserting
-	the template (Espanso style).
-</p>
-
 <button aria-label="Add new template" on:click={async () => addTemplate()}>
 	+
 </button>

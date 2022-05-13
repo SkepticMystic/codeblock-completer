@@ -3,8 +3,9 @@ import CCPlugin from "./main";
 import { splitAndTrim } from "./utils";
 import CodeblockTemplates from "./Components/CodeblockTemplates.svelte";
 
-const fragWithHTML = (html: string) =>
+export const fragWithHTML = (html: string) =>
 	createFragment((frag) => (frag.createDiv().innerHTML = html));
+
 export class SettingTab extends PluginSettingTab {
 	plugin: CCPlugin;
 
@@ -33,6 +34,11 @@ export class SettingTab extends PluginSettingTab {
 				};
 			});
 
+
+		new Setting(containerEl)
+			.setName('Codeblock Templates')
+			.setDesc(fragWithHTML('Give templates to specific codeblock types.<br />Use <code>$|$</code> to set where the cursor should be placed after inserting the template (Espanso style).'))
+			
 		new CodeblockTemplates({
 			target: containerEl,
 			props: { settingsTab: this, plugin: this.plugin },
