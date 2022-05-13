@@ -1,4 +1,4 @@
-import { Plugin } from "obsidian";
+import { MarkdownPreviewRenderer, Plugin } from "obsidian";
 import { DEFAULT_SETTINGS } from "./const";
 import { Settings } from "./interfaces";
 import { SettingTab } from "./SettingTab";
@@ -12,9 +12,22 @@ export default class CCPlugin extends Plugin {
 		this.addSettingTab(new SettingTab(this.app, this));
 
 		this.registerEditorSuggest(new CodeblockSuggester(this));
+
+
+		this.app.workspace.onLayoutReady(() => {
+			setTimeout(async () => {
+				const pluginTypes = this.getPluginTypes();
+				const newIgnores = this.settings.ignoreTypes.filter(t => pluginTypes.contains(t));
+				this.settings.ignoreTypes = newIgnores
+				await this.saveSettings()
+			}, 3000)
+		})
 	}
 
-	onunload() {}
+	//@ts-expect-error
+	getPluginTypes = () => Object.keys(MarkdownPreviewRenderer.codeBlockPostProcessors)
+
+	onunload() { }
 
 	async loadSettings() {
 		this.settings = Object.assign(

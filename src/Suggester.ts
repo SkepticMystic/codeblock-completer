@@ -47,14 +47,10 @@ export class CodeblockSuggester extends EditorSuggest<Suggestion> {
 
 
 	getSuggestions = (context: EditorSuggestContext): Suggestion[] => {
-		const { ignoreTypes } = this.plugin.settings
+		const { ignoreTypes, customTypes } = this.plugin.settings
 		const { query } = context;
 
-		const fromPlugins = Object.keys(
-			//@ts-ignore
-			MarkdownPreviewRenderer.codeBlockPostProcessors
-		);
-		const { customTypes } = this.plugin.settings;
+		const fromPlugins = this.plugin.getPluginTypes()
 
 		const all = <Suggestion[]>[
 			...fromPlugins

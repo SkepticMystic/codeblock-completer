@@ -37,17 +37,15 @@ export class SettingTab extends PluginSettingTab {
 
 		new Setting(containerEl).setName('Ignore Types').setDesc('Choose which plugin codeblocks to ignore from the suggestion list.')
 
-		//@ts-ignore
-		const ignoreOptions = Object.keys(MarkdownPreviewRenderer.codeBlockPostProcessors)
 		new Checkboxes({
 			target: containerEl,
-			props: { plugin, settingName: 'ignoreTypes', options: ignoreOptions }
+			props: { plugin, settingName: 'ignoreTypes', options: plugin.getPluginTypes() }
 		})
 
 		new Setting(containerEl)
 			.setName('Codeblock Templates')
 			.setDesc(fragWithHTML('Give templates to specific codeblock types.<br />Use <code>$|$</code> to set where the cursor should be placed after inserting the template (Espanso style).'))
-			
+
 		new CodeblockTemplates({
 			target: containerEl,
 			props: { settingsTab: this, plugin: this.plugin },
