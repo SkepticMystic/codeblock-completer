@@ -10,7 +10,12 @@ import {
 import type BCPlugin from "./main";
 import { removeDups } from "./utils";
 
-export class CodeblockSuggester extends EditorSuggest<string> {
+interface Suggestion {
+	label: string;
+	type: 'plugin' | 'custom'
+}
+
+export class CodeblockSuggester extends EditorSuggest<Suggestion> {
 	plugin: BCPlugin;
 
 	constructor(plugin: BCPlugin) {
@@ -40,22 +45,27 @@ export class CodeblockSuggester extends EditorSuggest<string> {
 		return null;
 	}
 
-	getSuggestions = (context: EditorSuggestContext) => {
+
+	getSuggestions = (context: EditorSuggestContext): Suggestion[] => {
 		const { query } = context;
+
 		const fromPlugins = Object.keys(
 			//@ts-ignore
 			MarkdownPreviewRenderer.codeBlockPostProcessors
 		);
-		return removeDups(
-			[...this.plugin.settings.customTypes, ...fromPlugins].filter(
-				(sug) => sug.toLowerCase().includes(query.toLowerCase())
-			)
-		);
+		const { customTypes } = this.plugin.settings;
+
+		const all = <Suggestion[]>[
+			...fromPlugins.map((t) => ({ type: 'plugin', label: t })),
+			...customTypes.map((t) => ({ type: 'custom', label: t }))
+		];
+
+		return removeDups(all.filter(sug => sug.label.toLowerCase().includes(query.toLowerCase())));
 	};
 
-	renderSuggestion(suggestion: string, el: HTMLElement): void {
+	renderSuggestion(sug: Suggestion, el: HTMLElement): void {
 		el.createDiv({
-			text: suggestion,
+			text: sug.label,
 			cls: "codeblock-suggestion",
 		});
 	}
@@ -86,7 +96,7 @@ export class CodeblockSuggester extends EditorSuggest<string> {
 		);
 	}
 
-	selectSuggestion(suggestion: string): void {
+	selectSuggestion(sug: Suggestion): void {
 		const {
 			context,
 			addLineBreak,
@@ -99,13 +109,17 @@ export class CodeblockSuggester extends EditorSuggest<string> {
 			const { start, end, editor } = context;
 			const currLine = editor.getLine(end.line);
 			const nextLine = editor.getLine(end.line + 1);
-			const template = this.getCodeblockTemplate(suggestion);
+			const template = this.getCodeblockTemplate(sug.label);
 
-			const replacement = `\`\`\`${suggestion}${addCBLabel ? "{}" : ""
-				}${addLineBreak(nextLine, template)}${addClosingBackticks(
-					currLine,
-					nextLine
-				)}`;
+			let repl = `\`\`\`${sug.label}`
+			repl += (sug.type === 'custom' && addCBLabel) ? " {}" : ""
+			repl += addLineBreak(nextLine, template)
+			repl += addClosingBackticks(
+				currLine,
+				nextLine
+			);
+
+			editor.replaceRange(repl, { ch: 0, line: start.line }, end);
 
 			editor.replaceRange(replacement, { ch: 0, line: start.line }, end);
 
