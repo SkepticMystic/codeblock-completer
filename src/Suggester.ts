@@ -120,20 +120,28 @@ export class CodeblockSuggester extends EditorSuggest<Suggestion> {
 			);
 
 			editor.replaceRange(repl, { ch: 0, line: start.line }, end);
+			const currValue = editor.getValue();
 
-			editor.replaceRange(replacement, { ch: 0, line: start.line }, end);
-
-			const cursorOff = editor.getValue().indexOf("$|$");
-			if (cursorOff !== -1) {
-				const cursorPos = editor.offsetToPos(cursorOff);
-				editor.setLine(
-					cursorPos.line,
-					editor.getLine(cursorPos.line).replace("$|$", "")
-				);
-				editor.setCursor(cursorPos);
-			} else {
-				editor.setCursor({ ch: 0, line: end.line + 1 });
+			if (template) {
+				const cbTemplateOff = currValue.indexOf('$|$', editor.posToOffset(start))
+				if (cbTemplateOff !== -1) {
+					const pos = editor.offsetToPos(cbTemplateOff)
+					editor.setLine(pos.line, editor.getLine(pos.line).replace('$|$', ''))
+					editor.setCursor(pos)
+					return
+				}
 			}
+
+			if (addCBLabel) {
+				const cbLabelOff = currValue.indexOf(' {}', editor.posToOffset(start))
+				if (cbLabelOff !== -1) {
+					editor.setCursor(editor.offsetToPos(cbLabelOff + 2))
+					return
+				}
+			}
+
+			editor.setCursor({ ch: 0, line: end.line + 1 });
+
 		}
 	}
 }
