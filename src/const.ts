@@ -4,4 +4,5 @@ export const DEFAULT_SETTINGS: Settings = {
 	addCBLabel: false,
 	customTypes: [],
 	codeblockTemplates: [],
+	ignoreTypes: [],
 };

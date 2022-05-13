@@ -1,7 +1,8 @@
-import { App, PluginSettingTab, Setting } from "obsidian";
+import { App, MarkdownPreviewRenderer, PluginSettingTab, Setting } from "obsidian";
 import CCPlugin from "./main";
 import { splitAndTrim } from "./utils";
 import CodeblockTemplates from "./Components/CodeblockTemplates.svelte";
+import Checkboxes from "./Components/Checkboxes.svelte";
 
 export const fragWithHTML = (html: string) =>
 	createFragment((frag) => (frag.createDiv().innerHTML = html));
@@ -34,6 +35,14 @@ export class SettingTab extends PluginSettingTab {
 				};
 			});
 
+		new Setting(containerEl).setName('Ignore Types').setDesc('Choose which plugin codeblocks to ignore from the suggestion list.')
+
+		//@ts-ignore
+		const ignoreOptions = Object.keys(MarkdownPreviewRenderer.codeBlockPostProcessors)
+		new Checkboxes({
+			target: containerEl,
+			props: { plugin, settingName: 'ignoreTypes', options: ignoreOptions }
+		})
 
 		new Setting(containerEl)
 			.setName('Codeblock Templates')

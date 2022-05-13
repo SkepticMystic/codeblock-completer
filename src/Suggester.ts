@@ -47,6 +47,7 @@ export class CodeblockSuggester extends EditorSuggest<Suggestion> {
 
 
 	getSuggestions = (context: EditorSuggestContext): Suggestion[] => {
+		const { ignoreTypes } = this.plugin.settings
 		const { query } = context;
 
 		const fromPlugins = Object.keys(
@@ -56,7 +57,9 @@ export class CodeblockSuggester extends EditorSuggest<Suggestion> {
 		const { customTypes } = this.plugin.settings;
 
 		const all = <Suggestion[]>[
-			...fromPlugins.map((t) => ({ type: 'plugin', label: t })),
+			...fromPlugins
+				.filter(t => !ignoreTypes.contains(t))
+				.map((t) => ({ type: 'plugin', label: t })),
 			...customTypes.map((t) => ({ type: 'custom', label: t }))
 		];
 

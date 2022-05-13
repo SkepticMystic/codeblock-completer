@@ -8,6 +8,7 @@ export interface Settings {
 	addCBLabel: boolean;
 	customTypes: string[];
 	codeblockTemplates: CodeblockTemplate[];
+	ignoreTypes: string[];
 }
 
 type CodeblockCallback = (
