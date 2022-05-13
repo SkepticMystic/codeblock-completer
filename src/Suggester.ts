@@ -60,17 +60,17 @@ export class CodeblockSuggester extends EditorSuggest<string> {
 		});
 	}
 
-	getCodeblockTemplate = (type: string) =>
+	getCodeblockTemplate = (type: string): string | undefined =>
 		this.plugin.settings.codeblockTemplates.find(
 			(cbTemp) => cbTemp.type === type
 		)?.template;
 
 	addLineBreak(nextLine: string, template: string | undefined) {
 		return nextLine === "```" || nextLine === "" || nextLine === "\n"
-			? `\n${template ?? ""}\n`
+			? `\n${template ?? ""}`
 			: template
-			? "\n" + template
-			: "";
+				? "\n" + template
+				: "";
 	}
 
 	addClosingBackticks(currLine: string, nextLine: string) {
@@ -101,12 +101,11 @@ export class CodeblockSuggester extends EditorSuggest<string> {
 			const nextLine = editor.getLine(end.line + 1);
 			const template = this.getCodeblockTemplate(suggestion);
 
-			const replacement = `\`\`\`${suggestion}${
-				addCBLabel ? "{}" : ""
-			}${addLineBreak(nextLine, template)}${addClosingBackticks(
-				currLine,
-				nextLine
-			)}`;
+			const replacement = `\`\`\`${suggestion}${addCBLabel ? "{}" : ""
+				}${addLineBreak(nextLine, template)}${addClosingBackticks(
+					currLine,
+					nextLine
+				)}`;
 
 			editor.replaceRange(replacement, { ch: 0, line: start.line }, end);
 
