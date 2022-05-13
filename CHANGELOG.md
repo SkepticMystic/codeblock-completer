@@ -1,4 +1,11 @@
 ## Changelog
+### [0.0.12](https://github.com/SkepticMystic/codeblock-completer/compare/0.0.11...0.0.12) (2022-05-13)
+
+
+### Features
+
+* :sparkles: Option to ignore types from suggestion list ([#7](https://github.com/SkepticMystic/codeblock-completer/issues/7)) ([91f0396](https://github.com/SkepticMystic/codeblock-completer/commit/91f0396e8b03baa35c890a5e9659854edbe1b6a6))
+
 ### [0.0.11](https://github.com/SkepticMystic/codeblock-completer/compare/0.0.10...0.0.11) (2022-05-13)
 
 
