@@ -1,4 +1,11 @@
 ## Changelog
+### [0.0.13](https://github.com/SkepticMystic/codeblock-completer/compare/0.0.12...0.0.13) (2022-05-13)
+
+
+### Fixes
+
+* :bug: Remove pluginTypes of plugins which aren't installed anymore ([ddb2d45](https://github.com/SkepticMystic/codeblock-completer/commit/ddb2d450f2412f0afdeb1f9248b2f5ef28f5a40b))
+
 ### [0.0.12](https://github.com/SkepticMystic/codeblock-completer/compare/0.0.11...0.0.12) (2022-05-13)
 
 
